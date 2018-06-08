@@ -1,22 +1,23 @@
 package testcase;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class TestCase {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class TestCase implements Iterator<String> {
 
     Logger logger = LoggerFactory.getLogger(TestCase.class);
 
     private String filePath;
 
-    TestCase(String filePath) {
+    public TestCase(String filePath) {
         this.filePath = filePath;
     }
 
@@ -54,6 +55,16 @@ public class TestCase {
 
     public int getSize() throws IOException{
 	    return readFile().length;
+    }
+
+    public boolean hasNext() {
+	// TODO Auto-generated method stub
+	return false;
+    }
+
+    public String next() {
+	// TODO Auto-generated method stub
+	return null;
     }
 
 }
