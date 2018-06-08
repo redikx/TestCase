@@ -1,6 +1,6 @@
 package testcase_Junit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
@@ -15,7 +15,7 @@ public class testCase_FilesCheck {
 
     @Parameters
     public static String[] fileList() {
-	String files[] = { "c:\\Java\\Projects\\source_file.txt", "c:\\Java\\Projects\\source_file_ext.txt" };
+	String files[] = { "c:\\Java\\Projects\\source_file1.txt", "c:\\Java\\Projects\\source_file2.txt" };
 	return files;
     }
 
@@ -40,4 +40,6 @@ public class testCase_FilesCheck {
     public void ifFileSizeNotZero() {
 	assertTrue(new File(input).length() > 0);
     }
-}
+    }
+
+ 
