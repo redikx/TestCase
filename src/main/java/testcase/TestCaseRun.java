@@ -9,13 +9,14 @@ public class TestCaseRun {
     
     private  static Logger logger = LoggerFactory.getLogger(TestCaseRun.class);
   
-    public static void execute(Server server, TestCase tc) throws IOException {
-	    ServerCommunication serverCommunication = new ServerCommunication(server);
+    public static void execute(Server server, TestCase tc) throws IOException, InterruptedException {
+	//* 
+	ServerCommunication serverCommunication = new ServerCommunication(server);
 	    serverCommunication.connect();
 	    
 	    for (int j = 0; j < tc.getSize(); j++) {
 		try {
-		    Thread.sleep(3000);
+		   Thread.sleep(100);
 		} catch (InterruptedException e) {
 		    logger.warn(e.getMessage());
 		}
@@ -24,31 +25,32 @@ public class TestCaseRun {
 		logger.debug("Sending:" + msg);
 		try {
 		    serverCommunication.sendMessage(msg);
+		    Thread.sleep(100);
 		} catch (IOException c) {
 		    logger.error(c.getMessage());
 		    throw c;
 		}
-
+	
 	    }
-	    
 	    serverCommunication.close();
     }
 
+    
+    
+   
     public static void main(String args[]) throws Exception {
+	
 	Logger logger = LoggerFactory.getLogger(TestCase.class);
 	logger.info("Start files reading");
+	
 	TestCase testCase = new TestCase("c:\\Java\\Projects\\source_file1.txt");
 	TestCase testCase2 = new TestCase("c:\\Java\\Projects\\source_file2.txt");
-	//int Users;
-	TestCaseList testCaseList = new TestCaseList();
-	testCaseList.addTestCase(testCase);
-	testCaseList.addTestCase(testCase2);
-	
-
-	for (int i = 0; i < testCaseList.getTestCaseListSize(); i++) {
-	    TestCase tc = testCaseList.getTestCase(i);
-	    Server server = new Server("127.0.0.1",31015);
+	logger.info("Files loaded, connecting");
+	Server server = new Server("192.168.198.130",22);
+	execute(server, testCase);
+	execute(server, testCase2);
+	    
 
 	}
     }
-}
+

@@ -12,31 +12,24 @@ public class Server {
     private int port;
     private InetAddress inetAddress;
     Logger logger = LoggerFactory.getLogger(TestCase.class);
+    
+    //* Constructor
     public Server(String hostName, int port) {
 	super();
 	this.hostName = hostName;
 	this.port = port;
     }
 
-    public String getHostName() {
-	return hostName;
-    }
+    //* Getters and Setters
+    public String getHostName() {return hostName;}
 
-    public void setHostName(String hostName) {
-	this.hostName = hostName;
-    }
+    public void setHostName(String hostName) {this.hostName = hostName;}
 
-    public int getPort() {
-	return port;
-    }
+    public int getPort() {return port;}
 
-    public void setPort(int port) {
-	this.port = port;
-    }
+    public void setPort(int port) {this.port = port;}
 
-    public InetAddress getInetAddress() {
-	return inetAddress;
-    }
+    public InetAddress getInetAddress() {return inetAddress;}
 
     public void setInetAddress(String hostName) {
 	try {

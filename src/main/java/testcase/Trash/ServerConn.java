@@ -1,10 +1,11 @@
-package testcase;
+package testcase.Trash;
 
 public class ServerConn {
 
     private String ipHost;
     private int portNumber;
     
+    //* Constructor
     public ServerConn(String ipHost, int portNumber) {
 	this.ipHost = ipHost;
 	this.portNumber = portNumber;
@@ -21,10 +22,6 @@ public class ServerConn {
     }
     public void setPortNumber(int portNumber) {
         this.portNumber = portNumber;
-    }
-    
-    public void sendLine() {
-	
     }
     
 }

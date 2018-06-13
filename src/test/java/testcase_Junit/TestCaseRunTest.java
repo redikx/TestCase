@@ -41,16 +41,16 @@ public class TestCaseRunTest extends TestCaseRun {
     }
 
    @Test
-   public void test0() throws ClassNotFoundException, IOException {
+   public void testConnectToMockTCPServer() throws ClassNotFoundException, IOException {
        TCPClient client = new TCPClient(31015);
        client.connect();
-       assertArrayEquals("A".getBytes(), client.send("Hello World\r").toByteArray());
+        assertArrayEquals("A".getBytes(), client.send("Hello World\r").toByteArray());
        client.close();
    }
    
    
     @Test
-    public void test1() {
+    public void testCase1() throws InterruptedException {
 	TestCase tc1 = new TestCase("c:\\Java\\Projects\\source_file1.txt");
 	try {
 	    TestCaseRun.execute(srv, tc1);
@@ -62,7 +62,7 @@ public class TestCaseRunTest extends TestCaseRun {
     }
     
     @Test
-    public void test2() {
+    public void testCase2() throws InterruptedException {
 	TestCase tc2 = new TestCase("c:\\Java\\Projects\\source_file2.txt");
 	try {
 	    TestCaseRun.execute(srv, tc2);
