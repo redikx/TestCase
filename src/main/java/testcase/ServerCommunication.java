@@ -1,26 +1,10 @@
 package testcase;
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 import java.io.BufferedOutputStream;
 import java.io.Closeable;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-=======
-import java.io.BufferedInputStream;
->>>>>>> eb9d5e3e3fbc87b4774469ca2a0ae9529da21559
-import java.io.BufferedOutputStream;
-import java.io.Closeable;
-import java.io.DataInputStream;
-import java.io.IOException;
-<<<<<<< HEAD
-import java.io.InputStream;
-=======
-import java.io.InputStreamReader;
->>>>>>> 2e8c80dc26338d67864a021e4d640948371c58c6
->>>>>>> eb9d5e3e3fbc87b4774469ca2a0ae9529da21559
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
