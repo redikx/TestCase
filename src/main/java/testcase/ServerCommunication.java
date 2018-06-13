@@ -41,19 +41,19 @@ public class ServerCommunication  implements Closeable {
 	    String messageToSend = message + '\r';
 	    osw.write(messageToSend);
 	    osw.flush();
-	    InputStream  isr = sock.getInputStream();
+	    //InputStream  isr = sock.getInputStream();
 	    	//* Reading Answer
-	    int carrier;
-	    logger.debug("Reading answer" );    
+	    //int carrier;
+	    logger.debug("Sending message : " + message);    
 //* Commented to check connection to Linux
-	    	 //InputStream inFromServer = sock.getInputStream();
-	         //DataInputStream in = new DataInputStream(inFromServer);
-	         //logger.info("Server says " + in.readUTF());
+	    	 InputStream inFromServer = sock.getInputStream();
+	         DataInputStream in = new DataInputStream(inFromServer);
+	         logger.debug("Server says " + in.readUTF());
 	         
-	    while ( (carrier = isr.read()) != 'A') {
-	    	    logger.debug("Received=" + carrier);
-	    	    instr.append((char)carrier);	    	    
-	    	}
+	    //while ( (carrier = isr.read()) != 'A') {
+	    //	    logger.debug("Received=" + carrier);
+	    //	    instr.append((char)carrier);	    	    
+	    //	}
 	    logger.debug("End of sending : " + messageToSend);
 	    }
 	    catch (IOException e) {logger.error("Error while sending : " + e.getMessage());}

@@ -55,7 +55,7 @@ public class TestCase implements Iterable<String>{
     }
 
 
-    public Iterator<String> iterator() {
+    	public Iterator<String> iterator() {
         Iterator<String> it = new Iterator<String>() {
 
             private int currentIndex = 0;
