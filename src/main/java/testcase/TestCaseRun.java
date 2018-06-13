@@ -43,7 +43,9 @@ public class TestCaseRun {
 	TestCase testCase = new TestCase("c:\\Java\\Projects\\source_file1.txt");
 	TestCase testCase2 = new TestCase("c:\\Java\\Projects\\source_file2.txt");
 	logger.info("Files loaded, connecting");
-	Server server = new Server("192.168.198.130", 31015);
+	//Server server = new Server("192.168.198.130", 31015);
+        Server server = new Server("10.242.44.22",31015);
+
 	execute(server, testCase);
 	execute(server, testCase2);
 
