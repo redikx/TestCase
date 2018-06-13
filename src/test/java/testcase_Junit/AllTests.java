@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ testCase_FilesCheck.class,MockitoTest.class })
+@SuiteClasses({ testCase_FilesCheck.class,ServerTest.class,MockitoTest.class })
 public class AllTests {
 
 }

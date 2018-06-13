@@ -38,7 +38,9 @@ public class TestCase {
         } catch (IOException e) {
 	    logger.error(e.getMessage(), e);
         }
+        finally {
         bufferedReader.close();
+        }
         return lines.toArray(new String[lines.size()]);
     }
 
