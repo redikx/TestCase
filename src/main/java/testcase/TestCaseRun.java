@@ -1,23 +1,53 @@
 package testcase;
 
+import java.io.IOException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class TestCaseRun {
 
-    public static void main(String args[]) throws Exception {
-	System.out.println("Starting file Reading");
-	TestCase testCase = new TestCase("c:\\Java\\Projects\\source_file.txt");
-	TestCase testCase2 = new TestCase("c:\\Java\\Projects\\source_file_ext.txt");
+    private static Logger logger = LoggerFactory.getLogger(TestCaseRun.class);
 
-	TestCaseList testCaseList = new TestCaseList();
-	System.out.println("Size before adding to list: " + testCaseList.getTestCaseListSize());
-	testCaseList.addTestCase(testCase);
-	testCaseList.addTestCase(testCase2);
-	System.out.println("Size after adding to list: " + testCaseList.getTestCaseListSize());
+    public static void execute(Server server, TestCase tc) throws IOException, InterruptedException {
+	// *
+	ServerCommunication serverCommunication = new ServerCommunication(server);
+	serverCommunication.connect();
 
-	for (int i = 0; i < testCaseList.getTestCaseListSize(); i++) {
-	    TestCase tc = testCaseList.getTestCase(i);
-	    for (int j = 0; j < tc.getSize(); j++) {
-		System.out.println(" File " + tc.getFilePath() + " line " + j + " value : " + tc.getLine(j));
+	tc.readFile();
+	for (String cur : tc) {
+	    try {
+		Thread.sleep(100);
+	    } catch (InterruptedException e) {
+		logger.warn(e.getMessage());
+	    }
+
+	    logger.debug("Sending:" + cur);
+	    try {
+		serverCommunication.sendMessage(cur);
+		Thread.sleep(1000);
+	    } catch (IOException c) {
+		logger.error(c.getMessage());
+		throw c;
 	    }
 	}
+
+	serverCommunication.close();
+
+    }
+
+    public static void main(String args[]) throws Exception {
+
+	Logger logger = LoggerFactory.getLogger(TestCase.class);
+	logger.info("Start files reading");
+	TestCase testCase = new TestCase("c:\\Java\\Projects\\source_file1.txt");
+	TestCase testCase2 = new TestCase("c:\\Java\\Projects\\source_file2.txt");
+	logger.info("Files loaded, connecting");
+
+        Server server = new Server("10.242.44.22",31015);
+	//Server server = new Server("192.168.198.130", 31015);
+	execute(server, testCase);
+	execute(server, testCase2);
+
     }
 }
