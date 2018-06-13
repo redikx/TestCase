@@ -2,6 +2,7 @@ package testcase;
 
 import java.io.BufferedOutputStream;
 import java.io.Closeable;
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
@@ -25,7 +26,7 @@ public class ServerCommunication  implements Closeable {
     //* Connect method creating socket
     public void connect() throws IOException {
 	this.sock = new Socket(server.getHostName(), server.getPort());
-	logger.info("SocketClient initialized");
+	logger.info("Connected OK to " + sock.getRemoteSocketAddress());
     }
 
     //* sendMessage method sending message to socket
@@ -45,10 +46,14 @@ public class ServerCommunication  implements Closeable {
 	    int carrier;
 	    logger.debug("Reading answer" );    
 //* Commented to check connection to Linux
-	    //while ( (carrier = isr.read()) != 'A') {
-	    	//    logger.debug("Received=" + carrier);
-	    	//    instr.append((char)carrier);	    	    
-	    	//}
+	    	 //InputStream inFromServer = sock.getInputStream();
+	         //DataInputStream in = new DataInputStream(inFromServer);
+	         //logger.info("Server says " + in.readUTF());
+	         
+	    while ( (carrier = isr.read()) != 'A') {
+	    	    logger.debug("Received=" + carrier);
+	    	    instr.append((char)carrier);	    	    
+	    	}
 	    logger.debug("End of sending : " + messageToSend);
 	    }
 	    catch (IOException e) {logger.error("Error while sending : " + e.getMessage());}
