@@ -2,6 +2,7 @@ package testcase_Junit;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.net.Socket;
 
 import org.junit.Test;
@@ -11,12 +12,12 @@ import testcase.Server;
 public class ServerTest {
 
     @Test
-    public void ifServerPortReachable() {
-	Server server = new Server("127.0.0.1",31015);
+    public void ifServerPortReachable() throws IOException{
+	Server server = new Server("10.242.44.22",31015);
 	assertTrue(serverListening(server));
     }
     
-    public static boolean serverListening(Server server)
+    public static boolean serverListening(Server server) throws IOException
     {
         Socket s = null;
         try

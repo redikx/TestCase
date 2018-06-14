@@ -37,8 +37,8 @@ public class ServerCommunication  implements Closeable {
 	    //* Sending Message
 	    try {
 	    BufferedOutputStream bos = new BufferedOutputStream(sock.getOutputStream());
-	    OutputStreamWriter osw = new OutputStreamWriter(bos, "US-ASCII");
-	    String messageToSend = message + '\r';
+	    OutputStreamWriter osw = new OutputStreamWriter(bos);       //(bos, "US-ASCII");
+	    String messageToSend = message+'\r';
 	    osw.write(messageToSend);
 	    osw.flush();
 	    //InputStream  isr = sock.getInputStream();
