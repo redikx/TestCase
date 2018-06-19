@@ -19,7 +19,9 @@ public class TestCase implements Iterable<String>{
     private List<String> lines = null;
     
     public TestCase(String filePath) {
-	file = new File(filePath);
+	//file = new File(filePath);
+	ClassLoader classLoader = getClass().getClassLoader();
+	file = new File(classLoader.getResource(filePath).getFile());
     }
 
     public String getFilePath() {
