@@ -2,7 +2,6 @@ package testcase;
 
 import java.io.IOException;
 import java.net.SocketException;
-import java.nio.BufferOverflowException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +53,7 @@ public class TestCaseRun {
         Server server = new Server("10.242.44.22",31015);
 
 	execute(server, testCase);
-	execute(server, testCase2);
+	//execute(server, testCase2);
 
     }
 }

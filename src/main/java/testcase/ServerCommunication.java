@@ -48,6 +48,7 @@ public class ServerCommunication implements Closeable {
 	    try {
 		BufferedOutputStream bos = new BufferedOutputStream(sock.getOutputStream());
 		OutputStreamWriter osw = new OutputStreamWriter(bos,"US-ASCII");
+		BufferedInputStream bis = new BufferedInputStream(sock.getInputStream());
 		
 		//* Header sending
 		ByteBuffer obbuf = ByteBuffer.allocate(2);
@@ -61,8 +62,8 @@ public class ServerCommunication implements Closeable {
 		logger.debug("Header sent " + shortLe);
 		logger.debug("Sending message : " + message);
 		
-		BufferedInputStream bis = new BufferedInputStream(sock.getInputStream());
-		InputStreamReader isr = new InputStreamReader(bis,"US-ASCII");
+		
+		//InputStreamReader isr = new InputStreamReader(bis,"US-ASCII");
 		getInputStreamSize(bis);
 		logger.debug("Server response size "); //" says " + isr.read());
 		logger.debug("End of sending : " + message);
@@ -80,13 +81,15 @@ public class ServerCommunication implements Closeable {
 	
     }
 
-    public int getInputStreamSize(InputStream is) throws IOException
+    public int getInputStreamSize(BufferedInputStream is) throws IOException
     {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+	logger.debug("Starting Input Stream reading");
      ByteArrayOutputStream bais = new ByteArrayOutputStream();
-     	    byte[] buf = new byte[1024];
-
+     	   
      	    int reads = is.read();
+     	    //int reas2 = is.readAllBytes().length;
+     	    //logger.debug("reas2 : " + reas2);
      	    while (reads != -1) {
      		bais.write(reads);
      		reads = is.read();
