@@ -27,6 +27,10 @@ public class TestCaseRun {
 	    try {
 		logger.info("Calling sendMessage(" + cur + ")");
 		serverCommunication.sendMessage(cur);
+		
+		// check output from server, if I as 1st, not R = QUIT
+		
+		
 		Thread.sleep(500);
 	    }
 	     catch (IOException c) {
