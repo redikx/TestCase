@@ -1,3 +1,5 @@
+WEBSetUser("cxt2ref");
+WEBPlan("C1_100","DS-045620","TestQuery");
 C1_100:WEBAddElements("REPORTER","C",128,"","","DE",1);
 C1_100:WEBAddElements("PARTNER","C",128,"","","FR","IT",2);
 C1_100:WEBAddElements("PRODUCT","C",128,"","","TOTAL",1);

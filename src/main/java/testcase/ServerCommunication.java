@@ -2,14 +2,9 @@ package testcase;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.SocketException;
@@ -57,16 +52,21 @@ public class ServerCommunication implements Closeable {
 		obbuf.putShort(shortLe);
 		bos.write(obbuf.array());
 		osw.write(message);
-		bos.flush();
 		osw.flush();
-		logger.debug("Header sent " + shortLe);
-		logger.debug("Sending message : " + message);
+		
+		int IntSize = getInputStreamSize(sock);
+		
+		String line_in = "";
+		while (bis.available() > 0 ) {
+		    char c = (char) bis.read();
+		    line_in += c; 
+		}
 		
 		
-		//InputStreamReader isr = new InputStreamReader(bis,"US-ASCII");
-		getInputStreamSize(bis);
-		logger.debug("Server response size "); //" says " + isr.read());
+		logger.debug("Server response size " + IntSize); //" says " + isr.read());
+		logger.debug("Response from server : " + line_in);
 		logger.debug("End of sending : " + message);
+		
 		
 	    }
 	    catch (SocketException s) {
@@ -81,31 +81,17 @@ public class ServerCommunication implements Closeable {
 	
     }
 
-    public int getInputStreamSize(BufferedInputStream is) throws IOException
+    public int getInputStreamSize(Socket socket) throws IOException
     {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
-	logger.debug("Starting Input Stream reading");
-     ByteArrayOutputStream bais = new ByteArrayOutputStream();
-     	   
-     	    int reads = is.read();
-     	    //int reas2 = is.readAllBytes().length;
-     	    //logger.debug("reas2 : " + reas2);
-     	    while (reads != -1) {
-     		bais.write(reads);
-     		reads = is.read();
-     	    }
-     	    	//while ( (is.read(buf, 0, len)) != -1) {
-     	    	//    System.out.println(is.toString());
-     	    	//    bais.write(buf,0,len);
-     	    	//    buf = bais.toByteArray();
-     	    	//    len++;
-     byte[] data = bais.toByteArray();
-     logger.info("Input bytes : " + data.length);
-     return data.length;
-	}
-     
-    
-    
+	byte[] bytes = new byte[2];
+	InputStream is = socket.getInputStream();
+	is.read(bytes, 0, 2) ; 
+	int msglen;
+	msglen=(bytes[0] & 0xff) * 256;
+	msglen+=(bytes[1] & 0xff);
+	return msglen;
+     }    
     
     // * Close method closing socket
     public void close() throws IOException {

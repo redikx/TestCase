@@ -53,7 +53,7 @@ public class TestCaseRun {
         Server server = new Server("10.242.44.22",31015);
 
 	execute(server, testCase);
-	//execute(server, testCase2);
+	execute(server, testCase2);
 
     }
 }
