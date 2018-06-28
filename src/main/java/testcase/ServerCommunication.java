@@ -35,9 +35,10 @@ public class ServerCommunication implements Closeable {
     }
 
     // * sendMessage method sending message to socket
-    public void sendMessage(String message) throws IOException,BufferOverflowException,SocketException {
-	StringBuilder instr = new StringBuilder();
-
+    public String sendMessage(String message) throws IOException,BufferOverflowException,SocketException {
+	//StringBuilder instr = new StringBuilder();
+	String line_in = "";
+	
 	if (this.sock.isConnected()) {
 	    // * Sending Message
 	    try {
@@ -56,29 +57,24 @@ public class ServerCommunication implements Closeable {
 		
 		int IntSize = getInputStreamSize(sock);
 		
-		String line_in = "";
 		while (bis.available() > 0 ) {
 		    char c = (char) bis.read();
 		    line_in += c; 
 		}
-		
-		
-		logger.debug("Server response size " + IntSize); //" says " + isr.read());
-		logger.debug("Response from server : " + line_in);
-		logger.debug("End of sending : " + message);
-		
-		
-	    }
+		    }
 	    catch (SocketException s) {
 	  		logger.error(s.getMessage());
-	  	    }
+	  		return "ERR SocketException";	
+	    }
 	    catch (IOException e) {
 		logger.error("Error while sending : " + e.getMessage(), e);
+		return "ERR IOException";
 	    }
 	} else {
 	    logger.error("Socket is not connected");
+	    return "ERR Socket no connected";
 	}
-	
+	return line_in;
     }
 
     public int getInputStreamSize(Socket socket) throws IOException

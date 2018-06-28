@@ -14,24 +14,33 @@ public class TestCaseRun {
 	// *
 	ServerCommunication serverCommunication = new ServerCommunication(server);
 	serverCommunication.connect();
-
+	
 	tc.readFile();
-	for (String cur : tc) {
+	for (String cur : tc)
+	{
 	    try {
 		Thread.sleep(100);
 	    } catch (InterruptedException e) {
 		logger.warn(e.getMessage());
 	    }
-	    logger.info("");
-	    logger.debug("Sending:" + cur);
+	    //logger.debug("Sending:" + cur);
 	    try {
-		logger.info("Calling sendMessage(" + cur + ")");
-		serverCommunication.sendMessage(cur);
+		String result = serverCommunication.sendMessage(cur);
+		logger.debug("Sending " + cur);
+		logger.debug(" Output from server : " + result);
 		
 		// check output from server, if I as 1st, not R = QUIT
 		
-		
-		Thread.sleep(500);
+		if (!result.isEmpty()) {
+	    if ( (result.substring(0,2).equals("E["))) {
+		logger.error(" ERROR, EXITING!!!");
+		serverCommunication.close();
+		System.exit(1);
+	    }
+	    
+		}
+	    
+		Thread.sleep(1000);
 	    }
 	     catch (IOException c) {
 		logger.error(c.getMessage());
