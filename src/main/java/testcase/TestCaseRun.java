@@ -2,14 +2,14 @@ package testcase;
 
 import java.io.IOException;
 import java.net.SocketException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TestCaseRun {
 
     private static Logger logger = LoggerFactory.getLogger(TestCaseRun.class);
-
+	
+	  
     public static void execute(Server server, TestCase tc) throws IOException, InterruptedException, SocketException {
 	// *
 	ServerCommunication serverCommunication = new ServerCommunication(server);
@@ -32,7 +32,7 @@ public class TestCaseRun {
 		// check output from server, if I as 1st, not R = QUIT
 		
 		if (!result.isEmpty()) {
-	    if ( (result.substring(0,2).equals("E["))) {
+	    if ( (!result.substring(0,2).equals("R["))) {
 		logger.error(" ERROR, EXITING!!!");
 		serverCommunication.close();
 		System.exit(1);
@@ -48,13 +48,14 @@ public class TestCaseRun {
 	    }
 	}
 	serverCommunication.close();
-    }
+		}
 
+    
+    
     public static void main(String args[]) throws Exception {
 
 	Logger logger = LoggerFactory.getLogger(TestCase.class);
 	logger.info("Start files reading");
-	
 	
 	TestCase testCase = new TestCase("source_file1.txt");
 	TestCase testCase2 = new TestCase("source_file2.txt");
@@ -67,6 +68,6 @@ public class TestCaseRun {
 
 	execute(server, testCase);
 	execute(server, testCase2);
+		}
 
-    }
 }
