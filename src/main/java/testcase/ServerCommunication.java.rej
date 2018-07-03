@@ -1,9 +1,0 @@
-diff a/src/main/java/testcase/ServerCommunication.java b/src/main/java/testcase/ServerCommunication.java	(rejected hunks)
-@@ -24,6 +24,7 @@
- +=======
-  import java.io.InputStreamReader;
-  >>>>>>> 2e8c80dc26338d67864a021e4d640948371c58c6
-++>>>>>>> eb9d5e3e3fbc87b4774469ca2a0ae9529da21559
-  import java.io.OutputStreamWriter;
-  import java.net.Socket;
- -import java.net.UnknownHostException;
