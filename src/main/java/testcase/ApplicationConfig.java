@@ -1,6 +1,5 @@
 package testcase;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,7 +22,7 @@ public class ApplicationConfig {
 	return new Server("10.242.44.22",31015);
     }
     
-    @Bean
+    @Bean 
     public ThreadExecutor threadExecutor() {
 	return new ThreadExecutor(conc_users);
     }
