@@ -23,12 +23,8 @@ public class ApplicationConfig {
     }
     
     @Bean 
-    public ThreadExecutor threadExecutor() {
-	return new ThreadExecutor(conc_users);
+    public TaskExecutor taskExecutor() {
+	return new TaskExecutor(conc_users);
     }
     
-    @Bean
-    public ThreadRun threadRun() {
-	return new ThreadRun();
-    }
 }

@@ -1,20 +1,19 @@
 package testcase;
 
-import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ThreadExecutor {
+public class TaskExecutor {
     
     
     private int users;
     
-    public ThreadExecutor(int users) {
+    public TaskExecutor(int users) {
 	this.users = users;
     }
     
-    public TaskExecutor threadPoolTaskExecutor() {
+    public ThreadPoolTaskExecutor threadPoolTaskExecutor() {
 	ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 	executor.setCorePoolSize(users);
 	executor.setMaxPoolSize(users);

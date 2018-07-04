@@ -13,7 +13,9 @@ public class TestCaseRun {
     private static Logger logger = LoggerFactory.getLogger(TestCaseRun.class);
 
 	@Autowired
-	private ThreadExecutor threadExecutor;
+	private TaskExecutor taskExecutor;
+	
+
         
     public static void main(String args[]) throws Exception {
 
