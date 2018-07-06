@@ -24,9 +24,6 @@ public class TestCaseRun {
 	
 	int conc_users = executor.getCorePoolSize();
 	
-	toRun torun = (toRun) context.getBean(toRun.class);
-	
-	
 	Logger logger = LoggerFactory.getLogger(TestCase.class);
 	logger.info("Start files reading");
 	
@@ -38,7 +35,10 @@ public class TestCaseRun {
 
 	for (int i=0;i<conc_users; i++) {
 		//executor.execute(testCase.execute());
-	executor.execute(torun);
+	logger.info("----------------------------------------------");
+	logger.info("Thread of user " + (int) (i+1) + " starting");
+	testCase.execute();
+	testCase2.execute();
 	}
 	Thread.sleep(1000);
 	System.out.println("After threads");

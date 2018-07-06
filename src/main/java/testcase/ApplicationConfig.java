@@ -12,10 +12,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 @ComponentScan("testcase")
 @PropertySource("classpath:app.properties")
 
-
-
 public class ApplicationConfig {
-
 
     @Value("${users}") 
     private int conc_users;

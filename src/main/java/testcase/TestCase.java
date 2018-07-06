@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class TestCase implements Iterable<String> {
+public class TestCase implements Iterable<String>, Runnable {
 
     
     private final static Logger logger = LoggerFactory.getLogger(TestCase.class);
@@ -113,7 +113,7 @@ public class TestCase implements Iterable<String> {
 		    if ((!result.substring(0, 2).equals("R["))) {
 			logger.error(" ERROR, EXITING!!!");
 			serverCommunication.close();
-			System.exit(1);
+		//	System.exit(1);
 		    }
 
 		}
@@ -125,6 +125,11 @@ public class TestCase implements Iterable<String> {
 	    }
 	}
 	serverCommunication.close();
+    }
+
+    public void run() {
+	// TODO Auto-generated method stub
+	
     }
 
 }
