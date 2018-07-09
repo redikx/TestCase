@@ -128,8 +128,19 @@ public class TestCase implements Iterable<String>, Runnable {
     }
 
     public void run() {
-	// TODO Auto-generated method stub
-	
+	logger.debug("Czeck if RUN() is executed");
+	try {
+	    this.execute();
+	} catch (SocketException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} catch (InterruptedException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+    
     }
-
 }

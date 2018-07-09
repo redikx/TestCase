@@ -33,24 +33,13 @@ public class TestCaseRun {
 
 	logger.info("Files loaded, connecting");
 
-	for (int i=0;i<conc_users; i++) {
-		//executor.execute(testCase.execute());
+	for (int i=1;i<=conc_users; i++) {
 	logger.info("----------------------------------------------");
-	logger.info("Thread of user " + (int) (i+1) + " starting");
-	testCase.execute();
-	testCase2.execute();
+	logger.info("Thread of user " + (int) (i) + " starting");
+	executor.execute(testCase);
+	//executor.execute(testCase2);
 	}
-	Thread.sleep(1000);
-	System.out.println("After threads");
-	executor.shutdown();
-	
-		
-	//System.out.println("Number of Users: " + 
 
-	
-	//logger.info("Read from file " + ${conc_users})
-	//testCase.execute();
-	//testCase2.execute();
-    }
+	    }
 
 }
