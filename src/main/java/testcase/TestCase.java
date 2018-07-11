@@ -3,6 +3,7 @@ package testcase;
 import java.io.File;
 import java.io.IOException;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,12 +12,11 @@ import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Scope(value ="prototype")// ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class TestCase implements Iterable<String>, Runnable {
 
     
@@ -88,59 +88,56 @@ public class TestCase implements Iterable<String>, Runnable {
 	return it;
     }
 
-    public void execute() throws IOException, InterruptedException, SocketException {
+    public void run() {
 	// *
+	logger.debug("Start RUN()");
 
 	ServerCommunication serverCommunication = new ServerCommunication(server);
-	serverCommunication.connect();
+	try {
+	    serverCommunication.connect();
+            readFile();
+	} catch (UnknownHostException e) {
+	    logger.error(e.getMessage());
+	} catch (IOException e) {
+	    logger.error(e.getMessage());
+	}
 
-	readFile();
 	for (String cur : lines) {
+	    /*
 	    try {
 		Thread.sleep(100);
 	    } catch (InterruptedException e) {
 		logger.warn(e.getMessage());
 	    }
+	    */
 	    // logger.debug("Sending:" + cur);
 	    try {
-		String result = serverCommunication.sendMessage(cur);
 		logger.debug("Sending " + cur);
+		String result = serverCommunication.sendMessage(cur);
 		logger.debug(" Output from server : " + result);
 
 		// check output from server, if I as 1st, not R = QUIT
 
 		if (!result.isEmpty()) {
 		    if ((!result.substring(0, 2).equals("R["))) {
-			logger.error(" ERROR, EXITING!!!");
+			//logger.error(" ERROR, EXITING!!!");
 			serverCommunication.close();
-		//	System.exit(1);
+			//	System.exit(1);
 		    }
 
 		}
 
-		Thread.sleep(1000);
 	    } catch (IOException c) {
 		logger.error(c.getMessage());
-		throw c;
 	    }
 	}
-	serverCommunication.close();
-    }
-
-    public void run() {
-	logger.debug("Czeck if RUN() is executed");
 	try {
-	    this.execute();
-	} catch (SocketException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    serverCommunication.close();
 	} catch (IOException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	} catch (InterruptedException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    logger.error(e.getMessage());
 	}
-    
+	
+	logger.debug("Stop RUN()");
+
     }
 }

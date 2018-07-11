@@ -1,9 +1,9 @@
 WEBSetUser("cxt2ref");
-WEBPlan("C1_100","DS-045620","TestQuery");
-C1_100:WEBAddElements("REPORTER","C",128,"","","DE",1);
-C1_100:WEBAddElements("PARTNER","C",128,"","","FR","IT",2);
-C1_100:WEBAddElements("PRODUCT","C",128,"","","TOTAL",1);
-C1_100:WEBAddElements("PERIOD","C",128,"","","198801","198802","198803","198804","198805","198806","198807","198808","198809","198810","198811","198812",12);
-C1_100:WEBAddElements("INDICATORS","C",128,"","","VALUE_IN_EUROS",1);
-C1_100:WEBExtract();
-C1_100:WEBClose();
+WEBPlan("C1_101","DS-045620","TestQuery");
+C1_101:WEBAddElements("REPORTER","C",128,"","","DE",1);
+C1_101:WEBAddElements("PARTNER","C",128,"","","FR","IT",2);
+C1_101:WEBAddElements("PRODUCT","C",128,"","","TOTAL",1);
+C1_101:WEBAddElements("PERIOD","C",128,"","","198801","198802","198803","198804","198805","198806","198807","198808","198809","198810","198811","198812",12);
+C1_101:WEBAddElements("INDICATORS","C",128,"","","VALUE_IN_EUROS",1);
+C1_101:WEBExtract();
+C1_101:WEBClose();

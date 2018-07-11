@@ -20,7 +20,7 @@ public class ServerCommunication implements Closeable {
 
     private Server server;
     private Socket sock = null;
-    Logger logger = LoggerFactory.getLogger(ServerCommunication.class);
+    private static final Logger logger = LoggerFactory.getLogger(ServerCommunication.class);
 
     // * Constructor
     public ServerCommunication(Server server) {
@@ -31,7 +31,10 @@ public class ServerCommunication implements Closeable {
     // * Connect method creating socket
     public void connect() throws UnknownHostException, IOException {
 	this.sock = new Socket(server.getHostName(), server.getPort());
+	this.sock.setTcpNoDelay(true);
 	logger.info("Connected OK to " + sock.getRemoteSocketAddress());
+	int qlen =getInputStreamSize(this.sock);
+	logger.info("Daemon queue length=" + qlen);
     }
 
     // * sendMessage method sending message to socket
@@ -56,12 +59,16 @@ public class ServerCommunication implements Closeable {
 		osw.flush();
 		
 		int IntSize = getInputStreamSize(sock);
+		logger.trace("rcv msg size=" +  IntSize);
 		
-		while (bis.available() > 0 ) {
+		int rcvd=0;
+		while(rcvd < IntSize) {
+		//while (bis.available() > 0 ) {
 		    char c = (char) bis.read();
 		    line_in += c; 
+		    rcvd++;
 		}
-		    }
+	    }
 	    catch (SocketException s) {
 	  		logger.error(s.getMessage());
 	  		return "ERR SocketException";	
@@ -79,10 +86,9 @@ public class ServerCommunication implements Closeable {
 
     public int getInputStreamSize(Socket socket) throws IOException
     {
-	Logger logger = LoggerFactory.getLogger(this.getClass());
 	byte[] bytes = new byte[2];
 	InputStream is = socket.getInputStream();
-	is.read(bytes, 0, 2) ; 
+	is.read(bytes);
 	int msglen;
 	msglen=(bytes[0] & 0xff) * 256;
 	msglen+=(bytes[1] & 0xff);
@@ -93,7 +99,7 @@ public class ServerCommunication implements Closeable {
     public void close() throws IOException {
 	if (!this.sock.isClosed()) {
 	    this.sock.close();
-	    logger.error("Closing socket");
+	    logger.info("Closing socket");
 	}
     }
 }
