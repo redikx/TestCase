@@ -14,9 +14,15 @@ public class ApplicationConfig {
 
     @Value("${users}") 
     private int conc_users;
+    
+    @Value("${server.ip}")
+    private String server_ip;
+    
+    @Value("${server.port}")
+    
     @Bean
     public Server server() {
-	return new Server("10.242.44.22",31015);
+	return new Server(server_ip,31015);
     }
     
     @Bean 

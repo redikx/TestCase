@@ -110,7 +110,6 @@ public class TestCase implements Iterable<String>, Runnable {
 		logger.warn(e.getMessage());
 	    }
 	    */
-	    // logger.debug("Sending:" + cur);
 	    try {
 		logger.debug("Sending " + cur);
 		String result = serverCommunication.sendMessage(cur);
