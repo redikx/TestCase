@@ -49,7 +49,6 @@ public class TestCaseRun {
 	    logger.info("Interrputed exception");
 	}
 context.close();
-logger.info("END OF PROCESS");
     }
 
 }

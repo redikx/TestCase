@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -50,7 +51,10 @@ public class TestCase implements Iterable<String>, Runnable {
 	    sc.close();
 	} catch (IOException ioe) {
 	    logger.error("IOException error while scanning " + file.getPath());
-	}
+	} finally
+	{ 
+	    Collections.shuffle(lines);}
+	
     }
 
     public String getLine(int line) throws IOException {
