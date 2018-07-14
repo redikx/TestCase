@@ -2,7 +2,6 @@ package testcase;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Iterator;
