@@ -2,6 +2,7 @@ package testcase;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -15,16 +16,17 @@ public String[] getTestCasesList() {
     return testCasesList;
 }
 
-public ArrayList<String> TestCaseListRandom() {
+public List<String> TestCaseListRandom() {
     
     // Convert String[] into ArrayList
     int cs_num = testCasesList.length;
-    ArrayList<String> CaseListOrdered = new ArrayList<String>();
+    List<String> caseListOrdered = new ArrayList<String>();
+    
     for (int i=0; i<cs_num; i++) {
-	CaseListOrdered.add(testCasesList[i]);
+	caseListOrdered.add(testCasesList[i]);
     }
-    Collections.shuffle(CaseListOrdered);
-    return CaseListOrdered;
+    Collections.shuffle(caseListOrdered);
+    return caseListOrdered;
 }
 
     

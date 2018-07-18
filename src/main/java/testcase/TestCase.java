@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -51,12 +52,9 @@ public class TestCase implements Iterable<String>, Runnable {
 	    sc.close();
 	} catch (IOException ioe) {
 	    logger.error("IOException error while scanning " + file.getPath());
-	} finally
-	{ 
-	    Collections.shuffle(lines);}
-	
+	} 
     }
-
+	
     public String getLine(int line) throws IOException {
 	if (lines == null) {
 	    throw new IOException("File has not been read");
@@ -93,8 +91,9 @@ public class TestCase implements Iterable<String>, Runnable {
 
     public void run() {
 	// *
+	long startTime =  System.currentTimeMillis();
+	//Date startDate=new Date(startTime);
 	logger.debug("Start RUN()");
-
 	ServerCommunication serverCommunication = new ServerCommunication(server);
 	try {
 	    serverCommunication.connect();
@@ -138,8 +137,8 @@ public class TestCase implements Iterable<String>, Runnable {
 	} catch (IOException e) {
 	    logger.error(e.getMessage());
 	}
-	
-	logger.debug("Stop RUN()");
+	long endTime = System.currentTimeMillis();
+	logger.debug("STOP Thread started at " + startTime + ", finished at " + endTime);
 
     }
 }

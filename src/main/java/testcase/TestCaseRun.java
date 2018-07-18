@@ -1,6 +1,7 @@
 package testcase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,25 +24,20 @@ public class TestCaseRun {
 	ThreadPoolTaskExecutor executor = (ThreadPoolTaskExecutor) context.getBean(ThreadPoolTaskExecutor.class);
 	executor.setWaitForTasksToCompleteOnShutdown(true);
 	int conc_users = executor.getCorePoolSize();
-
 	System.out.println("USERS : " + conc_users);
+	
 	for (int i = 1; i <= conc_users; i++) {
 	    logger.info("Thread of user " + (int) (i) + " starting");
-
-	    // Build random file list for user i
-	    ArrayList<String> RandomList = tc.TestCaseListRandom();
+	    List<String> RandomList = tc.TestCaseListRandom();
 	    for (int j = 0; j < RandomList.size(); j++) {
 		TestCase testCase = (TestCase) context.getBean(TestCase.class, RandomList.get(j));
 		try {
 		    executor.execute(testCase);
-		    // executor.execute(testCase2);
 		} catch (Exception e) {
 		    logger.error(e.getMessage(), e);
 		}
 	    }
-
 	}
-
 	try {
 	    Thread.sleep(1000);
 	    executor.shutdown();
