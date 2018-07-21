@@ -48,12 +48,12 @@ public class TestCaseRunTest extends TestCaseRun {
        client.close();
    }
    
-   
+ /*  
     @Test
     public void testCase1() throws InterruptedException {
 	TestCase tc1 = new TestCase("c:\\Java\\Projects\\source_file1.txt");
 	try {
-	    tc1.execute();
+	    Stc1.execute();
 	} catch (IOException e) {
 	    logger.error(e.getMessage(), e);
 	    fail(e.getMessage());
@@ -71,6 +71,6 @@ public class TestCaseRunTest extends TestCaseRun {
 	    fail(e.getMessage());
 	    
 	}
-    }
+    }*/
 
 }

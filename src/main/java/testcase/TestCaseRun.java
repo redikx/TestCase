@@ -9,7 +9,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
 import datamodel.Test_Table;
-import datamodel.Test_TableDAO;
 import datamodel.Test_TableDAO_interface;
 
 
@@ -30,9 +29,9 @@ public class TestCaseRun {
 	Test_TableDAO_interface test_TableDAO = (Test_TableDAO_interface) context.getBean("test_TableDAO");
 	Test_Table tt = new Test_Table();
 	test_TableDAO.save(tt);
+	logger.info("###################End Db Connection");
 	
 	System.exit(0);
-	logger.info("###################End Db Connection");
 	
 	
 	TestConfig tc = context.getBean(TestConfig.class);

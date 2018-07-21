@@ -1,0 +1,8 @@
+2018-07-21T23:49:50,469 INFO  [main] org.springframework.context.support.AbstractApplicationContext(590) - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@3c407114: startup date [Sat Jul 21 23:49:50 CEST 2018]; root of context hierarchy
+2018-07-21T23:49:51,206 INFO  [main] org.hibernate.Version(46) - HHH000412: Hibernate Core {5.3.2.Final}
+2018-07-21T23:49:51,209 INFO  [main] org.hibernate.cfg.Environment(213) - HHH000206: hibernate.properties not found
+2018-07-21T23:49:51,362 INFO  [main] org.hibernate.annotations.common.reflection.java.JavaReflectionManager(49) - HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2018-07-21T23:49:52,015 INFO  [main] org.hibernate.dialect.Dialect(157) - HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2018-07-21T23:49:52,955 INFO  [main] org.springframework.orm.hibernate5.HibernateTransactionManager(378) - Using DataSource [org.apache.commons.dbcp2.BasicDataSource@74a6f9c1] of Hibernate SessionFactory for HibernateTransactionManager
+2018-07-21T23:49:52,968 INFO  [main] org.springframework.scheduling.concurrent.ExecutorConfigurationSupport(171) - Initializing ExecutorService 
+2018-07-21T23:49:52,978 INFO  [main] org.springframework.scheduling.concurrent.ExecutorConfigurationSupport(171) - Initializing ExecutorService  'threadPoolTaskExecutor'
