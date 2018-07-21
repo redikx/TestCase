@@ -1,11 +1,16 @@
 package testcase;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import datamodel.Test_TableDAO;
 
 @Configuration
 @ComponentScan("testcase")
@@ -29,8 +34,6 @@ public class ApplicationConfig {
 
     
     @Bean 
-    //@Scope(value="prototype")
-    //@Async
     public ThreadPoolTaskExecutor threadPoolTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(conc_users);
@@ -43,5 +46,11 @@ public class ApplicationConfig {
     @Bean
     public TestConfig testconfig() {
 	return new TestConfig();
+    }
+    
+
+    @Bean
+    public Test_TableDAO test_TableDAO() {
+	return new Test_TableDAO();
     }
 }

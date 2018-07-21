@@ -1,6 +1,5 @@
 package testcase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -9,16 +8,33 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
+import datamodel.Test_Table;
+import datamodel.Test_TableDAO;
+import datamodel.Test_TableDAO_interface;
+
+
+
 @Component
 public class TestCaseRun {
-
+    
    private static final Logger logger = LoggerFactory.getLogger(TestCaseRun.class);
 
     public static void main(String args[]) {
 
+	
+	
+	
 	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
-
-	// Load configuration
+	
+	logger.info("##################Test Db Connection");
+	Test_TableDAO_interface test_TableDAO = (Test_TableDAO_interface) context.getBean("test_TableDAO");
+	Test_Table tt = new Test_Table();
+	test_TableDAO.save(tt);
+	
+	System.exit(0);
+	logger.info("###################End Db Connection");
+	
+	
 	TestConfig tc = context.getBean(TestConfig.class);
 
 	ThreadPoolTaskExecutor executor = (ThreadPoolTaskExecutor) context.getBean(ThreadPoolTaskExecutor.class);
@@ -32,7 +48,7 @@ public class TestCaseRun {
 	    for (int j = 0; j < RandomList.size(); j++) {
 		TestCase testCase = (TestCase) context.getBean(TestCase.class, RandomList.get(j));
 		try {
-		    executor.execute(testCase);
+		   // executor.execute(testCase);
 		} catch (Exception e) {
 		    logger.error(e.getMessage(), e);
 		}
@@ -45,6 +61,7 @@ public class TestCaseRun {
 	    logger.info("Interrputed exception");
 	}
 context.close();
+
     }
 
 }

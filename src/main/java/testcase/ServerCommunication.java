@@ -23,7 +23,7 @@ public class ServerCommunication implements Closeable {
     private static final Logger logger = LoggerFactory.getLogger(ServerCommunication.class);
 
     // * Constructor
-    public ServerCommunication(Server server) {
+    public ServerCommunication(Server serverd) {
 	super();
 	this.server = server;
     }
