@@ -99,9 +99,9 @@ public class TestCase implements Iterable<String>, Runnable {
 	    serverCommunication.connect();
             readFile();
 	} catch (UnknownHostException e) {
-	    logger.error(e.getMessage());
+	    logger.error(e.getMessage() + "Unknown host Exception");
 	} catch (IOException e) {
-	    logger.error(e.getMessage());
+	    logger.error(e.getMessage() + " IOException");
 	}
 
 	for (String cur : lines) {

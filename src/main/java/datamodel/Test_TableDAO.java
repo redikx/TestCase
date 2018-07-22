@@ -2,8 +2,12 @@ package datamodel;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaQuery;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -38,6 +42,26 @@ public class Test_TableDAO implements Test_TableDAO_interface {
     		session.close();
     		return Test_TableList;
     	}
+
+
+		public void deleteEmptyTest_Table() {
+			Session session = this.sessionFactory.openSession();
+			System.out.println("Starting delete");
+			session.beginTransaction();
+			Query<Test_Table> query = session.createQuery("delete from Test_Table where db_name is null");
+			query.executeUpdate();
+			session.getTransaction().commit();
+			session.close();
+			System.out.println("Delete done");
+			
+		}
+
+
+		public int countRowsTest_Table() {
+			Session session = this.sessionFactory.openSession();
+			session.beginTransaction();
+			return 0;
+		}
 
 
     }

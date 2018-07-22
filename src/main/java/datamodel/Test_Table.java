@@ -44,7 +44,9 @@ public String toString() {
     return "Test_Table [Id=" + Id + ", db_name=" + db_name + "]";
 }
 
-
+public String toString(int row) {
+    return "Test_Table [Id=" + row + ", db_name=" + db_name + "]";
+}
 
 
 

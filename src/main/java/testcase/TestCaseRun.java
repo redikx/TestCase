@@ -8,7 +8,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
+import datamodel.RunsDAO_interface;
 import datamodel.Test_Table;
+import datamodel.Test_TableDAO;
 import datamodel.Test_TableDAO_interface;
 
 
@@ -25,21 +27,15 @@ public class TestCaseRun {
 	
 	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 	
-	logger.info("##################Test Db Connection");
-	Test_TableDAO_interface test_TableDAO = (Test_TableDAO_interface) context.getBean("test_TableDAO");
-	Test_Table tt = new Test_Table();
-	test_TableDAO.save(tt);
-	logger.info("###################End Db Connection");
-	
-	System.exit(0);
-	
-	
 	TestConfig tc = context.getBean(TestConfig.class);
 
 	ThreadPoolTaskExecutor executor = (ThreadPoolTaskExecutor) context.getBean(ThreadPoolTaskExecutor.class);
 	executor.setWaitForTasksToCompleteOnShutdown(true);
 	int conc_users = executor.getCorePoolSize();
-	System.out.println("USERS : " + conc_users);
+	
+	logger.info("Logging Start in DB");
+	RunsDAO_interface runsTbl = (RunsDAO_interface) context.getBean("runsDAO");
+	int run_id  = runsTbl.insertRuns(conc_users);
 	
 	for (int i = 1; i <= conc_users; i++) {
 	    logger.info("Thread of user " + (int) (i) + " starting");
@@ -47,7 +43,7 @@ public class TestCaseRun {
 	    for (int j = 0; j < RandomList.size(); j++) {
 		TestCase testCase = (TestCase) context.getBean(TestCase.class, RandomList.get(j));
 		try {
-		   // executor.execute(testCase);
+		    executor.execute(testCase);
 		} catch (Exception e) {
 		    logger.error(e.getMessage(), e);
 		}
@@ -59,6 +55,8 @@ public class TestCaseRun {
 	} catch (InterruptedException e) {
 	    logger.info("Interrputed exception");
 	}
+	runsTbl.updateETime(run_id);
+	
 context.close();
 
     }
