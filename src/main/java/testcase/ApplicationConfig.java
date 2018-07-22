@@ -11,7 +11,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import datamodel.RunsDAO;
-import datamodel.Test_TableDAO;
 
 @Configuration
 @ComponentScan("testcase")
@@ -50,11 +49,6 @@ public class ApplicationConfig {
     }
     
 
-    @Bean
-    public Test_TableDAO test_TableDAO() {
-	return new Test_TableDAO();
-    }
-    
     @Bean 
     public RunsDAO runsDAO() {
     	return new RunsDAO();

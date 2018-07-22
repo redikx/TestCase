@@ -9,11 +9,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
 import datamodel.RunsDAO_interface;
-import datamodel.Test_Table;
-import datamodel.Test_TableDAO;
-import datamodel.Test_TableDAO_interface;
-
-
 
 @Component
 public class TestCaseRun {
@@ -45,7 +40,7 @@ public class TestCaseRun {
 		try {
 		    executor.execute(testCase);
 		} catch (Exception e) {
-		    logger.error(e.getMessage(), e);
+		    logger.error( e.getMessage(), e);
 		}
 	    }
 	}

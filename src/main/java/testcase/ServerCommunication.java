@@ -23,7 +23,7 @@ public class ServerCommunication implements Closeable {
     private static final Logger logger = LoggerFactory.getLogger(ServerCommunication.class);
 
     // * Constructor
-    public ServerCommunication(Server serverd) {
+    public ServerCommunication(Server server) {
 	super();
 	this.server = server;
     }
@@ -31,6 +31,7 @@ public class ServerCommunication implements Closeable {
     // * Connect method creating socket
     public void connect() throws UnknownHostException, IOException {
 	this.sock = new Socket(server.getHostName(), server.getPort());
+	System.out.println("TCP");
 	this.sock.setTcpNoDelay(true);
 	logger.info("Connected OK to " + sock.getRemoteSocketAddress());
 	int qlen =getInputStreamSize(this.sock);
