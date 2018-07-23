@@ -1,15 +1,13 @@
 package testcase;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import datamodel.Run_CasesDAO;
 import datamodel.RunsDAO;
 
 @Configuration
@@ -52,5 +50,10 @@ public class ApplicationConfig {
     @Bean 
     public RunsDAO runsDAO() {
     	return new RunsDAO();
+    }
+
+    @Bean
+    public Run_CasesDAO run_casedDAO() {
+    	return new Run_CasesDAO();
     }
 }

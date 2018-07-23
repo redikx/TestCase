@@ -31,7 +31,6 @@ public class ServerCommunication implements Closeable {
     // * Connect method creating socket
     public void connect() throws UnknownHostException, IOException {
 	this.sock = new Socket(server.getHostName(), server.getPort());
-	System.out.println("TCP");
 	this.sock.setTcpNoDelay(true);
 	logger.info("Connected OK to " + sock.getRemoteSocketAddress());
 	int qlen =getInputStreamSize(this.sock);

@@ -1,7 +1,5 @@
 package datamodel;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.hibernate.Session;
@@ -27,7 +25,7 @@ public class RunsDAO implements RunsDAO_interface {
 
 	public int insertRuns(int users) {
 		Session session = this.sessionFactory.openSession();
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss:SS");
+		//DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss:SS");
 		Date Btime = new Date();
 		session.beginTransaction();
 		Runs runs_tbl = new Runs();

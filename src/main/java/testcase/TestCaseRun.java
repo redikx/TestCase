@@ -5,9 +5,11 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
+import datamodel.Run_CasesDAO_interface;
 import datamodel.RunsDAO_interface;
 
 @Component
@@ -30,6 +32,9 @@ public class TestCaseRun {
 	
 	logger.info("Logging Start in DB");
 	RunsDAO_interface runsTbl = (RunsDAO_interface) context.getBean("runsDAO");
+	
+	// THIS LINE IS USELESS
+	Run_CasesDAO_interface run_casesTbl = (Run_CasesDAO_interface) context.getBean("run_casedDAO");
 	int run_id  = runsTbl.insertRuns(conc_users);
 	
 	for (int i = 1; i <= conc_users; i++) {

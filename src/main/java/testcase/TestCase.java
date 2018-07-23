@@ -91,7 +91,7 @@ public class TestCase implements Iterable<String>, Runnable {
 
     public void run() {
 	// *
-	long startTime =  System.currentTimeMillis();
+	//long startTime =  System.currentTimeMillis();
 	//Date startDate=new Date(startTime);
 	logger.debug("Start RUN()");
 	ServerCommunication serverCommunication = new ServerCommunication(server);
@@ -114,6 +114,9 @@ public class TestCase implements Iterable<String>, Runnable {
 	    */
 	    try {
 		logger.debug("Sending " + cur);
+		// Here insert into Run_cases
+//		 int run_case_id = run_casesTbl.insertRuns(cur);
+		 
 		String result = serverCommunication.sendMessage(cur);
 		logger.debug(" Output from server : " + result);
 
@@ -137,8 +140,8 @@ public class TestCase implements Iterable<String>, Runnable {
 	} catch (IOException e) {
 	    logger.error(e.getMessage());
 	}
-	long endTime = System.currentTimeMillis();
-	logger.debug("STOP Thread started at " + startTime + ", finished at " + endTime);
+	//long endTime = System.currentTimeMillis();
+	logger.debug("STOP Thread");
 
     }
 }
