@@ -16,6 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import datamodel.Run_CasesDAO;
+import datamodel.Run_CasesDAO_interface;
+
 @Component
 @Scope(value ="prototype")// ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class TestCase implements Iterable<String>, Runnable {
@@ -28,6 +31,9 @@ public class TestCase implements Iterable<String>, Runnable {
 
     @Autowired
     private Server server;
+  
+    @Autowired
+    private Run_CasesDAO run_CasesDAO;
     
     private List<String> lines = null;
 
@@ -115,7 +121,8 @@ public class TestCase implements Iterable<String>, Runnable {
 	    try {
 		logger.debug("Sending " + cur);
 		// Here insert into Run_cases
-//		 int run_case_id = run_casesTbl.insertRuns(cur);
+		 int run_case_id = run_CasesDAO.insertRuns(cur);
+		 System.out.println("RUN CASE ID = " + run_case_id);
 		 
 		String result = serverCommunication.sendMessage(cur);
 		logger.debug(" Output from server : " + result);

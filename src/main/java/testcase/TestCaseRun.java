@@ -33,8 +33,8 @@ public class TestCaseRun {
 	logger.info("Logging Start in DB");
 	RunsDAO_interface runsTbl = (RunsDAO_interface) context.getBean("runsDAO");
 	
-	// THIS LINE IS USELESS
-	Run_CasesDAO_interface run_casesTbl = (Run_CasesDAO_interface) context.getBean("run_casedDAO");
+	
+	//Run_CasesDAO_interface run_casesTbl = (Run_CasesDAO_interface) context.getBean("run_casedDAO");
 	int run_id  = runsTbl.insertRuns(conc_users);
 	
 	for (int i = 1; i <= conc_users; i++) {
