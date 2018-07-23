@@ -46,6 +46,17 @@ private Date Case_Start_time;
 @Temporal(TemporalType.TIMESTAMP)
 private Date Case_End_time;
 
+@Column(name = "Result")
+private String Result;
+
+public String getResult() {
+	return Result;
+}
+
+public void setResult(String result) {
+	Result = result;
+}
+
 public int getRun_Case_id() {
 	return Run_Case_id;
 }

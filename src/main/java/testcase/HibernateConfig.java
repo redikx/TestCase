@@ -32,7 +32,7 @@ public class HibernateConfig {
     public DataSource dataSource() {
 	BasicDataSource dataSource = new BasicDataSource();
 	dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-	dataSource.setUrl("jdbc:mysql://localhost/apptestcasedb?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC");
+	dataSource.setUrl("jdbc:mysql://localhost/apptestcasedb?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=CET");
 	dataSource.setUsername("app1user");
 	dataSource.setPassword("radek01");
 	
