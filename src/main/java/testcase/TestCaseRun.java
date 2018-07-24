@@ -34,7 +34,7 @@ public class TestCaseRun {
 	RunsDAO_interface runsTbl = (RunsDAO_interface) context.getBean("runsDAO");
 	
 	
-	//Run_CasesDAO_interface run_casesTbl = (Run_CasesDAO_interface) context.getBean("run_casedDAO");
+	Run_CasesDAO_interface run_casesTbl = (Run_CasesDAO_interface) context.getBean("run_casedDAO");
 	int run_id  = runsTbl.insertRuns(conc_users);
 	
 	for (int i = 1; i <= conc_users; i++) {
@@ -42,7 +42,10 @@ public class TestCaseRun {
 	    List<String> RandomList = tc.TestCaseListRandom();
 	    for (int j = 0; j < RandomList.size(); j++) {
 		TestCase testCase = (TestCase) context.getBean(TestCase.class, RandomList.get(j));
+		System.out.println("PROCESS : " + testCase.getFilePath());
+		//testCase.readRun_Id(run_id);
 		try {
+			testCase.readRunId(run_id);
 		    executor.execute(testCase);
 		} catch (Exception e) {
 		    logger.error( e.getMessage(), e);

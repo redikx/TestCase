@@ -23,8 +23,17 @@ import datamodel.Run_CasesDAO_interface;
 @Scope(value ="prototype")// ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class TestCase implements Iterable<String>, Runnable {
 
-    
+	
     private final static Logger logger = LoggerFactory.getLogger(TestCase.class);
+    
+    private int run_id;
+    
+    public TestCase() 
+    { }
+    
+    public void readRunId(int Run_id) {
+    	this.run_id = Run_id;
+    }
     
     File file;
     private String filePath;
@@ -96,6 +105,8 @@ public class TestCase implements Iterable<String>, Runnable {
     }
 
     public void run() {
+    	System.out.println("RUN ID ::::: " + run_id);
+    	//int run_id = this.readRun_Id();
 	// *
 	//long startTime =  System.currentTimeMillis();
 	//Date startDate=new Date(startTime);
@@ -126,10 +137,11 @@ public class TestCase implements Iterable<String>, Runnable {
 		 
 		String result = serverCommunication.sendMessage(cur);
 		logger.debug(" Output from server : " + result);
-
 		// check output from server, if I as 1st, not R = QUIT
 
 		if (!result.isEmpty()) {
+			String colResult = result.substring(0, 3);
+			run_CasesDAO.updateETime(run_case_id, colResult);
 		    if ((!result.substring(0, 2).equals("R["))) {
 			//logger.error(" ERROR, EXITING!!!");
 			serverCommunication.close();
@@ -151,4 +163,4 @@ public class TestCase implements Iterable<String>, Runnable {
 	logger.debug("STOP Thread");
 
     }
-}
+    }

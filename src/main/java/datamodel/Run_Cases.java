@@ -41,10 +41,10 @@ private String result;
 @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 		 CascadeType.DETACH, CascadeType.REFRESH})
 @JoinColumn(name="run_id")
-private Runs runs; 
+private Runs runs;
+
 
 @Column()
-
 public int getRun_Case_id() {
 	return run_Case_id;
 }
