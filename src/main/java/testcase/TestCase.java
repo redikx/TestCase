@@ -105,13 +105,9 @@ public class TestCase implements Iterable<String>, Runnable {
     }
 
     public void run() {
-    	System.out.println("RUN ID ::::: " + run_id);
-    	//int run_id = this.readRun_Id();
-	// *
-	//long startTime =  System.currentTimeMillis();
-	//Date startDate=new Date(startTime);
-	logger.debug("Start RUN()");
+    logger.debug("Start RUN()");
 	ServerCommunication serverCommunication = new ServerCommunication(server);
+	
 	try {
 	    serverCommunication.connect();
             readFile();
@@ -122,31 +118,23 @@ public class TestCase implements Iterable<String>, Runnable {
 	}
 
 	for (String cur : lines) {
-	    /*
-	    try {
-		Thread.sleep(100);
-	    } catch (InterruptedException e) {
-		logger.warn(e.getMessage());
-	    }
-	    */
 	    try {
 		logger.debug("Sending " + cur);
-		// Here insert into Run_cases
 		 int run_case_id = run_CasesDAO.insertRuns(cur);
-		 System.out.println("RUN CASE ID = " + run_case_id);
-		 
 		String result = serverCommunication.sendMessage(cur);
 		logger.debug(" Output from server : " + result);
-		// check output from server, if I as 1st, not R = QUIT
-
+	
+		String colResult = result.substring(0, 3);
 		if (!result.isEmpty()) {
-			String colResult = result.substring(0, 3);
 			run_CasesDAO.updateETime(run_case_id, colResult);
 		    if ((!result.substring(0, 2).equals("R["))) {
 			//logger.error(" ERROR, EXITING!!!");
 			serverCommunication.close();
+			run_CasesDAO.updateETime(run_case_id, colResult);
+
 			//	System.exit(1);
 		    }
+			run_CasesDAO.updateETime(run_case_id, colResult);
 
 		}
 
