@@ -50,6 +50,21 @@ public class RunsDAO implements RunsDAO_interface {
 		
 	}
 
+	public void insertCases(int RunId, String casename) {
+		// run_Id from input
+		Session session = this.sessionFactory.openSession();
+		Date Etime = new Date();
+		session.beginTransaction();
+		Run_Cases rc = new Run_Cases();
+		Runs run = session.load(Runs.class, new Integer(RunId));
+		System.out.println("Call run(add) for : " + rc.toString());
+		rc.setCase_Start_time(Etime);
+		rc.setCase_Name(casename);
+		run.add(rc);
+		session.getTransaction().commit();
+		session.save(rc);
+	}
+
 
 
 }

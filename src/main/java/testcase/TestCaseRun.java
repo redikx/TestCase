@@ -53,9 +53,7 @@ public class TestCaseRun {
 	    logger.info("Interrputed exception");
 	}
 	runsTbl.updateETime(run_id);
-	
 context.close();
-
     }
 
 }

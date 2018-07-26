@@ -1,5 +1,6 @@
 package datamodel;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,7 +40,25 @@ private Date end_time;
 					  CascadeType.DETACH, CascadeType.REFRESH})
 private List<Run_Cases> run_cases;
 
+public List<Run_Cases> getCases() {
+	return run_cases;
+}
 
+public void setCases(List<Run_Cases> cases) {
+	this.run_cases = cases;
+}
+
+// add convenience methods for bi-directional relationship
+
+public void add(Run_Cases tempRun_Cases) {
+	
+	System.out.println(" add procedure adding RunCase to ArrayList : " + tempRun_Cases.toString());
+	if (run_cases == null) {
+		run_cases = new ArrayList<Run_Cases>();
+	}
+	run_cases.add(tempRun_Cases);
+	
+} 
 
 public int getRun_id() {
 	return run_id;

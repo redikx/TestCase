@@ -16,8 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import datamodel.Run_Cases;
 import datamodel.Run_CasesDAO;
 import datamodel.Run_CasesDAO_interface;
+import datamodel.RunsDAO;
+import datamodel.RunsDAO_interface;
 
 @Component
 @Scope(value ="prototype")// ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -43,6 +46,9 @@ public class TestCase implements Iterable<String>, Runnable {
   
     @Autowired
     private Run_CasesDAO run_CasesDAO;
+    
+    @Autowired
+    private RunsDAO_interface runDAO;
     
     private List<String> lines = null;
 
@@ -120,21 +126,25 @@ public class TestCase implements Iterable<String>, Runnable {
 	for (String cur : lines) {
 	    try {
 		logger.debug("Sending " + cur);
-		 int run_case_id = run_CasesDAO.insertRuns(cur);
+
+		// Here insert into Run_case ( run_Case_id automatic)
+		//Run_Cases tempRun = new Run_Cases();
+		runDAO.insertCases(run_id, cur );
+		//int run_case_id = run_CasesDAO.insertRuns(cur);
 		String result = serverCommunication.sendMessage(cur);
 		logger.debug(" Output from server : " + result);
 	
 		String colResult = result.substring(0, 3);
 		if (!result.isEmpty()) {
-			run_CasesDAO.updateETime(run_case_id, colResult);
+			//run_CasesDAO.updateETime(run_case_id, colResult);
 		    if ((!result.substring(0, 2).equals("R["))) {
 			//logger.error(" ERROR, EXITING!!!");
 			serverCommunication.close();
-			run_CasesDAO.updateETime(run_case_id, colResult);
+			//run_CasesDAO.updateETime(run_case_id, colResult);
 
 			//	System.exit(1);
 		    }
-			run_CasesDAO.updateETime(run_case_id, colResult);
+			//run_CasesDAO.updateETime(run_case_id, colResult);
 
 		}
 
