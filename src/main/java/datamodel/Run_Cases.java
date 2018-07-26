@@ -43,6 +43,9 @@ private String result;
 @JoinColumn(name="run_id")
 private Runs runs;
 
+public void setRuns(Runs runs) {
+	this.runs = runs;
+} 
 
 @Column()
 public int getRun_Case_id() {

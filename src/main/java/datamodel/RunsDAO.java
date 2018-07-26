@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
+
 public class RunsDAO implements RunsDAO_interface {
 
 	public RunsDAO() {    
@@ -57,11 +59,14 @@ public class RunsDAO implements RunsDAO_interface {
 		session.beginTransaction();
 		Run_Cases rc = new Run_Cases();
 		Runs run = session.load(Runs.class, new Integer(RunId));
-		System.out.println("Call run(add) for : " + rc.toString());
+		System.out.println("through run : " + run.toString());
 		rc.setCase_Start_time(Etime);
 		rc.setCase_Name(casename);
+		rc.setRuns(run);
+		System.out.println("Call run(add) for : " + rc.toString());
 		run.add(rc);
 		session.getTransaction().commit();
+		System.out.println("Call run(add) for : " + rc.toString());
 		session.save(rc);
 	}
 
