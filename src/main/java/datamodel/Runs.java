@@ -52,7 +52,6 @@ public void setCases(List<Run_Cases> cases) {
 
 public void add(Run_Cases tempRun_Cases) {
 	
-	System.out.println(" add procedure adding RunCase to ArrayList : " + tempRun_Cases.toString());
 	if (run_cases == null) {
 		run_cases = new ArrayList<Run_Cases>();
 	}

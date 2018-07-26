@@ -129,22 +129,21 @@ public class TestCase implements Iterable<String>, Runnable {
 
 		// Here insert into Run_case ( run_Case_id automatic)
 		//Run_Cases tempRun = new Run_Cases();
-		runDAO.insertCases(run_id, cur );
+		int run_case_id = runDAO.insertCases(run_id, cur );
 		//int run_case_id = run_CasesDAO.insertRuns(cur);
 		String result = serverCommunication.sendMessage(cur);
 		logger.debug(" Output from server : " + result);
-	
+		
 		String colResult = result.substring(0, 3);
 		if (!result.isEmpty()) {
-			//run_CasesDAO.updateETime(run_case_id, colResult);
 		    if ((!result.substring(0, 2).equals("R["))) {
-			//logger.error(" ERROR, EXITING!!!");
+			logger.error(" ERROR, EXITING!!!");
 			serverCommunication.close();
-			//run_CasesDAO.updateETime(run_case_id, colResult);
+			run_CasesDAO.updateETime(run_case_id, colResult);
 
 			//	System.exit(1);
 		    }
-			//run_CasesDAO.updateETime(run_case_id, colResult);
+			run_CasesDAO.updateETime(run_case_id, colResult);
 
 		}
 

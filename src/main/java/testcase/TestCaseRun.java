@@ -40,10 +40,14 @@ public class TestCaseRun {
 		
 		try {
 			testCase.readRunId(run_id);
+			System.out.println("EXECUTING THREAD " + i + " FILE " + RandomList.get(j));
 		    executor.execute(testCase);
 		} catch (Exception e) {
 		    logger.error( e.getMessage(), e);
 		}
+		finally {
+	    	 runsTbl.updateETime(run_id);
+	    }
 	    }
 	}
 	try {
@@ -52,7 +56,7 @@ public class TestCaseRun {
 	} catch (InterruptedException e) {
 	    logger.info("Interrputed exception");
 	}
-	runsTbl.updateETime(run_id);
+	
 context.close();
     }
 
