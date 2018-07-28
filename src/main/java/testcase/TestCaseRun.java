@@ -1,9 +1,11 @@
 package testcase;
 
 import java.util.List;
+import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
@@ -24,6 +26,10 @@ public class TestCaseRun {
 	executor.setWaitForTasksToCompleteOnShutdown(true);
 	
 	int conc_users = executor.getCorePoolSize();
+    
+
+	
+	
 	
 	logger.info("Logging Start in DB");
 	RunsDAO_interface runsTbl = (RunsDAO_interface) context.getBean("runsDAO");
@@ -40,7 +46,7 @@ public class TestCaseRun {
 		
 		try {
 			testCase.readRunId(run_id);
-			System.out.println("EXECUTING THREAD " + i + " FILE " + RandomList.get(j));
+			//System.out.println("EXECUTING THREAD " + i + " FILE " + RandomList.get(j));
 		    executor.execute(testCase);
 		} catch (Exception e) {
 		    logger.error( e.getMessage(), e);

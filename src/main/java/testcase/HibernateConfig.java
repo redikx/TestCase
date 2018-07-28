@@ -24,7 +24,6 @@ public class HibernateConfig {
 	sessionFactory.setDataSource(dataSource());
 	sessionFactory.setPackagesToScan("datamodel");
 	sessionFactory.setHibernateProperties(hibernateProperties());
-	
 	return sessionFactory;
     }
     
@@ -51,6 +50,13 @@ public class HibernateConfig {
     private final Properties hibernateProperties() {
 	Properties hibernateProperties = new Properties();
 	hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL57Dialect");
+	hibernateProperties.setProperty("hibernate.c3p0.pool_size","10");
+	hibernateProperties.setProperty("hibernate.c3p0.min_size","5");
+	hibernateProperties.setProperty("hibernate.c3p0.max_size","200");
+	hibernateProperties.setProperty("hibernate.c3p0.timeout","1800");
+	hibernateProperties.setProperty("hibernate.show_sql","false");
+	hibernateProperties.setProperty("hibernate.hbm2ddl.auto","validate");
+	hibernateProperties.setProperty("hibernate.c3p0.acquire_increment","1");
 	return hibernateProperties;
     }
     

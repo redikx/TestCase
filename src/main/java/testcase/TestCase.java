@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -16,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import datamodel.Run_Cases;
 import datamodel.Run_CasesDAO;
-import datamodel.Run_CasesDAO_interface;
-import datamodel.RunsDAO;
 import datamodel.RunsDAO_interface;
 
 @Component
@@ -143,7 +138,7 @@ public class TestCase implements Iterable<String>, Runnable {
 
 			//	System.exit(1);
 		    }
-			run_CasesDAO.updateETime(run_case_id, colResult);
+			//run_CasesDAO.updateETime(run_case_id, colResult);
 
 		}
 

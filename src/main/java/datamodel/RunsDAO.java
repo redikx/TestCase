@@ -1,13 +1,10 @@
 package datamodel;
 
 import java.util.Date;
-import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import ch.qos.logback.core.net.SyslogOutputStream;
 
 public class RunsDAO implements RunsDAO_interface {
 
@@ -36,7 +33,8 @@ public class RunsDAO implements RunsDAO_interface {
 		runs_tbl.setStart_time(Btime);
 		runs_tbl.setEnd_time(null);
 		session.getTransaction().commit();
-		session.save(runs_tbl);		
+		session.save(runs_tbl);
+		session.close();
 		return runs_tbl.getRun_id();
 	}
 
@@ -49,7 +47,7 @@ public class RunsDAO implements RunsDAO_interface {
 		runs_tbls.setEnd_time(Etime);
 		session.getTransaction().commit();
 		session.save(runs_tbls);		
-		
+		session.close();
 	}
 
 	public int insertCases(int RunId, String casename) {
@@ -65,6 +63,7 @@ public class RunsDAO implements RunsDAO_interface {
 		run.add(rc);
 		session.getTransaction().commit();
 		session.save(rc);
+		session.close();
 		return rc.getRun_Case_id();
 	}
 

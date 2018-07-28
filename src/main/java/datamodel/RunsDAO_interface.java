@@ -1,7 +1,5 @@
 package datamodel;
 
-import java.util.List;
-
 public interface RunsDAO_interface {
 
 	void save(RunsDAO p);

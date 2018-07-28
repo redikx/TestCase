@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.sun.media.jfxmedia.logging.Logger;
+
 public class Run_CasesDAO implements Run_CasesDAO_interface {
 
 	public Run_CasesDAO() {
@@ -25,6 +27,7 @@ public class Run_CasesDAO implements Run_CasesDAO_interface {
 			rc.setResult(null);
 			session.getTransaction().commit();
 			session.save(rc);
+			session.close();
 			return rc.getRun_Case_id();
 
 		}
@@ -37,7 +40,8 @@ public class Run_CasesDAO implements Run_CasesDAO_interface {
 		rc.setCase_End_time(Etime);
 		rc.setResult(Result);
 		session.getTransaction().commit();
-		session.save(rc);		
+		session.save(rc);	
+		session.close();
 	}
 
 /*		Session session = this.sessionFactory.openSession();

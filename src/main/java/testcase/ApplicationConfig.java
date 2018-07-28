@@ -16,6 +16,9 @@ import datamodel.RunsDAO;
 
 public class ApplicationConfig {
 
+	@Value("${test.cases}")
+	private String[] testCasesProp;
+	
     @Value("${users}") 
     private int conc_users;
     
@@ -30,7 +33,7 @@ public class ApplicationConfig {
 	return new Server(server_ip,server_port);
     }
 
-    
+   
     @Bean 
     public ThreadPoolTaskExecutor threadPoolTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
