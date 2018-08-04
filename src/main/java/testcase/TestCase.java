@@ -126,8 +126,22 @@ public class TestCase implements Iterable<String>, Runnable {
 		//Run_Cases tempRun = new Run_Cases();
 		int run_case_id = runDAO.insertCases(run_id, cur );
 		//int run_case_id = run_CasesDAO.insertRuns(cur);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		float stime = System.nanoTime();
 		String result = serverCommunication.sendMessage(cur);
-		logger.debug(" Output from server : " + result);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		float etime = System.nanoTime();
+		float timeElapsed =(etime-stime)/1000000000;
+		logger.debug(" Output from server : " + result + "; Time : " + timeElapsed + "(s)");
 		
 		String colResult = result.substring(0, 3);
 		if (!result.isEmpty()) {

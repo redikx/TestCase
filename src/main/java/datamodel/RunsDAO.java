@@ -6,8 +6,9 @@ import java.util.Date;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
-
+//@Transactional
 public class RunsDAO implements RunsDAO_interface {
 
 	public RunsDAO() {    

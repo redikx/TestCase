@@ -5,9 +5,11 @@ import java.util.Date;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sun.media.jfxmedia.logging.Logger;
 
+//@Transactional
 public class Run_CasesDAO implements Run_CasesDAO_interface {
 
 	public Run_CasesDAO() {
